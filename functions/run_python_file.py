@@ -11,7 +11,7 @@ def run_python_file(working_directory, file_path, args=[]):
             return f'Error: "{file_path}" is not a Python file.'
         try:
             process = subprocess.run(["python", file_path] + args, timeout=30, capture_output=True, cwd=working_directory, text=True)
-            if len(process.stdout) != 0:
+            if len(process.stdout) != 0 or len(process.stderr) != 0:
                 results = f"STDOUT: {process.stdout}, STDERR: {process.stderr}"
                 if process.returncode != 0:
                     results += f", Process exited with code {process.returncode}"
